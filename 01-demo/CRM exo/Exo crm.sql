@@ -93,3 +93,42 @@ WHERE DATEDIFF(facture.date_paiement, facture.date_crea) <= 30;
 
 
 
+-- 3e Partie creation du diagram
+
+Table client {
+  id integer [pk, not null]
+  nom varchar(255) [not null]
+}
+
+Table projet {
+  id integer [pk, not null]
+  client_id INT [not null]
+  nom varchar(255) [not null]
+}
+
+Table devis {
+  id INT [pk, not null]
+  version INT [not null]
+  reference varchar(10) [not null]
+  prix float [not null]
+  projet_id INT [not null]
+
+}
+
+Table facture {
+  id INT [pk, not null]
+  reference varchar(10) [not null]
+  info varchar(255) [not null]
+  total float [not null]
+  date_crea date [not null]
+  date_paiement date
+  devis_id INt [not null]
+}
+
+
+
+Ref: "client"."id" < "projet"."client_id"
+
+Ref: "projet"."id" < "devis"."projet_id"
+
+Ref: "devis"."id" < "facture"."devis_id"
