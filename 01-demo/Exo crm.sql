@@ -41,10 +41,19 @@ ENGINE=InnoDB
 
 --1 - Afficher toutes les factures avec le nom des clients
 
-SELECT facture, nom FROM client;
+SELECT client.nom, facture.reference FROM client 
+INNER JOIN projet ON client.id = projet.client_id
+INNER JOIN devis ON projet.id = devis.projet_id
+INNER JOIN facture ON devis.id = facture.devis_id;
 
 
 --2 - Afficher le nombre de factures par client afficher 0 factures si il n'y a pas de factures
+
+SELECT client.nom COUNT(facture.reference) FROM client
+LEFT JOIN projet ON client.id = projet.client_id
+LEFT JOIN devis ON projet.id = devis.projet_id
+LEFT JOIN facture ON devis.id = facture.devis_id
+GROUP BY client.nom;
 
 
 --3 - afficher le chiffre d'affaire par client
