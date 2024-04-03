@@ -29,6 +29,7 @@ FROM personne
 SELECT MAX(salaire)
 FROM personne
 
+-- Avoir plus gros salaire et plus petit salaire
 
 
 SELECT nom FROM personne
@@ -37,20 +38,49 @@ where salaire = (SELECT MAX(salaire) FROM personne);
 SELECT nom FROM personne
 where salaire = (SELECT MAX(salaire) FROM personne);
 
+-- Avoir plus gros salaire et plus petit salaire
 
+SELECT * FROM personne 
+ORDER BY salaire DESC
+LIMIT 1;
+
+SELECT * FROM personne 
+ORDER BY salaire ASC
+LIMIT 1;
+
+
+-- Moyenne salaire
 
 SELECT AVG(salaire) FROM personne;
+
 
 SELECT COUNT(nom) FROM personne;
 SELECT nom FROM personne
 where salaire BETWEEN 3000000 AND 6000000;
 
+-- Mettre en minuscule ou en majuscule
 
 SELECT UCASE(nom) FROM personne;
 SELECT LOWER(prenom) FROM personne;
+
+-- recherche avec condition caractère
 
 SELECT * FROM personne
 where nom LIKE '%a%'
 
 SELECT * FROM personne 
 where salaire LIKE '%2%'
+
+-- Renommer 
+
+SELECT nom AS blase
+FROM personne
+
+-- Tri par age puis nom
+
+SELECT * FROM personne 
+WHERE age = (SELECT MAX(age) FROM personne)
+ORDER BY nom;
+
+SELECT * FROM personne
+ORDER BY age,nom DESC
