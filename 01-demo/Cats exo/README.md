@@ -1,5 +1,5 @@
 # la structure
-
+```mysql
 USE zoo;
 CREATE table chat(
     id int AUTO_INCREMENT PRIMARY KEY,
@@ -8,15 +8,15 @@ CREATE table chat(
     age tinyint(1) not null
 )
 ENGINE=InnoDB
-
+```
 # la data 
-
+```mysql
 INSERT INTO chat (nom, yeux, age) VALUES
 ('maine coon', 'marron', 20),
 ('siamois', 'bleu', 15),
 ('bengal', 'marron', 18),
 ('Scottish Fold', 'marron', 10);
-
+```
 # exo 
 
 
