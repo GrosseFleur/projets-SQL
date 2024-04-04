@@ -77,13 +77,28 @@ CREATE TABLE location_skis.lignesfic(
     PRIMARY KEY(noFic, noLig)
     )
 ENGINE=INNODB;
-
+-- soldé, rendu, en cours
 
 --Liste des clients (nom, prénom, adresse, code postal, ville) ayant au moins une fiche de location en cours.
 
+SELECT clients.nom, clients.prenom, clients.adresse, clients.cpo, clients.ville FROM clients
+JOIN fiches ON clients.noCli = fiches.noCli
+WHERE etat = 'EC'
+GROUP BY clients.nom;
+
+
 --Détail de la fiche de location de M. Dupond Jean de Paris (avec la désignation des articles loués, la date de départ et de retour).
 
+SELECT clients.nom, clients.prenom, articles.designation, lignesfic.depart, lignesfic.retour FROM clients
+JOIN fiches ON clients.noCli = fiches.noCli
+JOIN lignesfic ON fiches.noFic = lignesfic.noFic
+JOIN articles ON lignesfic.refart = articles.refart
+WHERE clients.nom like 'Dup%' AND clients.prenom LIKE 'Jea%' AND clients.ville LIKE 'Par%'
+
 --Liste de tous les articles (référence, désignation et libellé de la catégorie) dont le libellé de la catégorie contient ski.
+
+SELECT articles.refart, articles.designation, categories.libelle FROM articles
+JOIN 
 
 --Calcul du montant de chaque fiche soldée et du montant total des fiches.
 

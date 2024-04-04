@@ -92,7 +92,7 @@ JOIN projet ON client.id = projet.client_id
 JOIN devis on projet.id = devis.projet_id
 JOIN facture ON devis.id = facture.devis_id
 where facture.date_paiement IS NULL 
-OR DAY(facture.date_paiement) > 30;
+AND DATEDIFF(curdate(), facture.date_crea) > 30;
 
 -- 3e Partie creation du diagram
 
