@@ -19,7 +19,7 @@ INSERT INTO chat (nom, yeux, age) VALUES
 ```
 # exo 
 
-
+```mysql
 -- affichage des données
 
 SELECT nom FROM chat
@@ -46,3 +46,4 @@ SELECT AVG(age) FROM chat
 -- nombre de chats 
 
 SELECT COUNT(*) FROM chat
+```
