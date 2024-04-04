@@ -39,6 +39,8 @@ ENGINE=InnoDB
 ```
 
 # les datas
+
+```mysql
 DELETE FROM client;
 DELETE FROM projet;
 DELETE FROM devis;
@@ -78,9 +80,9 @@ INSERT INTO facture (reference,info,total,devis_id,date_crea,date_paiement)
 	('FA004', 'logiciel devis', 3000, 3, '2024-03-03','2024-04-03'),
 	('FA005', 'site ecommerce', 5000, 4, '2024-04-01',null),
 	('FA006', 'logiciel ERP', 2000, 2, '2024-04-01',null);
-
+```
 # les questions
-
+```mysql
 
 --1 - Afficher toutes les factures avec le nom des clients
 
@@ -136,3 +138,5 @@ JOIN devis on projet.id = devis.projet_id
 JOIN facture ON devis.id = facture.devis_id
 where facture.date_paiement IS NULL 
 OR DAY(facture.date_paiement) > 30;
+
+```

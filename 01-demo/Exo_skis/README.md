@@ -3,7 +3,7 @@
 ![diagram](Diagram_skis.svg)
 
 # la structure
-
+```mysql
 CREATE TABLE location_skis.clients(
     noCli int AUTO_INCREMENT PRIMARY KEY,
     nom varchar(30) not null,
@@ -77,9 +77,9 @@ CREATE TABLE location_skis.lignesfic(
     PRIMARY KEY(noFic, noLig)
     )
 ENGINE=INNODB;
-
+```
 # les data
-
+```mysql
 
 -- -----------------------------------------------------
 -- Data for table `location_skis`.`clients`
@@ -252,7 +252,7 @@ INSERT INTO `location_skis`.`lignesfic` (`noFic`, `noLig`, `refart`, `depart`, `
 INSERT INTO `location_skis`.`lignesfic` (`noFic`, `noLig`, `refart`, `depart`, `retour`) VALUES (1008, 1, 'S01', DATE_SUB(NOW(),INTERVAL  0 DAY), NULL);
 
 COMMIT;
-
+```
 # exo
 
 
