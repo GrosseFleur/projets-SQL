@@ -9,7 +9,7 @@ CREATE TABLE location_skis.clients(
     nom varchar(30) not null,
     prenom varchar(30),
     adresse varchar(120),
-    cpo varchar(5), not null,
+    cpo varchar(5) not null,
     ville varchar(80) not null
 )
 ENGINE=InnoDB;
@@ -25,7 +25,7 @@ CREATE TABLE location_skis.fiches(
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.lignesfic(
-    noFic int AUTO_INCREMENT PRIMARY KEY,
+    noFic int,
     noLig int AUTO_INCREMENT PRIMARY KEY,
     FOREIGN KEY(noFic) REFERENCES location_skis.fiches(noFic),
     refart char(8) not null,
@@ -35,27 +35,27 @@ CREATE TABLE location_skis.lignesfic(
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.categories(
-    codeCate char(5) AUTO_INCREMENT PRIMARY KEY,
+    codeCate char(5) not null PRIMARY KEY,
     libelle varchar(30) not null
 )
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.gammes(
-    codeGam char(5) AUTO_INCREMENT PRIMARY KEY,
+    codeGam char(5) not null PRIMARY KEY,
     libelle varchar(45) not null
 )
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.tarifs(
-    codeTarif char(5) AUTO_INCREMENT PRIMARY KEY,
+    codeTarif char(5) not null PRIMARY KEY,
     libelle varchar(30) not null,
     prixjour decimal(5) not null
 )
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.grilletarifs(
-    codeGam char(5) AUTO_INCREMENT PRIMARY KEY,
-    codeCate char(5) AUTO_INCREMENT PRIMARY KEY,
+    codeGam char(5),
+    codeCate char(5),
     codeTarif char(5),
     FOREIGN KEY(codeGam) REFERENCES location_skis.gammes(codeGam),
     FOREIGN KEY(codeCate) REFERENCES location_skis.categories(codeCate),
@@ -64,7 +64,7 @@ CREATE TABLE location_skis.grilletarifs(
 ENGINE=InnoDB;
 
 CREATE TABLE location_skis.articles(
-    refart char(5) AUTO_INCREMENT PRIMARY KEY,
+    refart char(5) not null PRIMARY KEY,
     designation varchar(80) not null,
     codeGam char(5),
     codeCate char(5),
