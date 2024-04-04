@@ -24,15 +24,6 @@ CREATE TABLE location_skis.fiches(
 )
 ENGINE=InnoDB;
 
-CREATE TABLE location_skis.lignesfic(
-    noFic int,
-    noLig int AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY(noFic) REFERENCES location_skis.fiches(noFic),
-    refart char(8) not null,
-    depart datetime not null,
-    retour datetime
-)
-ENGINE=InnoDB;
 
 CREATE TABLE location_skis.categories(
     codeCate char(5) not null PRIMARY KEY,
@@ -57,6 +48,7 @@ CREATE TABLE location_skis.grilletarifs(
     codeGam char(5),
     codeCate char(5),
     codeTarif char(5),
+    PRIMARY KEY(codeGam, codeCate)
     FOREIGN KEY(codeGam) REFERENCES location_skis.gammes(codeGam),
     FOREIGN KEY(codeCate) REFERENCES location_skis.categories(codeCate),
     FOREIGN KEY(codeTarif) REFERENCES location_skis.tarifs(codeTarif)
@@ -72,3 +64,16 @@ CREATE TABLE location_skis.articles(
     FOREIGN KEY(codeCate) REFERENCES location_skis.grilletarifs(codeCate)
 )
 ENGINE=InnoDB;
+
+
+CREATE TABLE location_skis.lignesfic(
+    noFic int not null,
+    noLig int not null,
+    FOREIGN KEY(noFic) REFERENCES location_skis.fiches(noFic),
+    refart char(8) not null,
+    FOREIGN KEY(refart) REFERENCES location_skis.articles(refart),
+    depart datetime not null,
+    retour datetime,
+    PRIMARY KEY(noFic, noLig)
+    )
+ENGINE=INNODB;
