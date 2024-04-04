@@ -93,14 +93,18 @@ SELECT clients.nom, clients.prenom, articles.designation, lignesfic.depart, lign
 JOIN fiches ON clients.noCli = fiches.noCli
 JOIN lignesfic ON fiches.noFic = lignesfic.noFic
 JOIN articles ON lignesfic.refart = articles.refart
-WHERE clients.nom like 'Dup%' AND clients.prenom LIKE 'Jea%' AND clients.ville LIKE 'Par%'
+WHERE clients.nom = 'Dupond' AND clients.prenom = 'Jean' AND clients.ville = 'Paris'
 
 --Liste de tous les articles (référence, désignation et libellé de la catégorie) dont le libellé de la catégorie contient ski.
 
-SELECT articles.refart, articles.designation, categories.libelle FROM articles
-JOIN 
+SELECT articles.refart, articles.designation, categories.libelle FROM categories
+JOIN grilletarifs ON categories.codeCate = grilletarifs.codeCate
+JOIN articles ON grilletarifs.codeCate = articles.codeCate
+WHERE categories.libelle like '%ski%'
 
 --Calcul du montant de chaque fiche soldée et du montant total des fiches.
+
+SELECT 
 
 --Calcul du nombre d’articles actuellement en cours de location.
 
