@@ -85,13 +85,14 @@ WHERE facture.date_paiement IS NULL;
 
 --6 - afficher les factures en retard de paiment 30 jours max avec le nombre de jours de retard
 
-SELECT facture.reference, DATEDIFF(facture.date_paiement, facture.date_crea)  FROM client
+SELECT facture.reference , DATEDIFF(curdate(), facture.date_crea)  as jours
+
+FROM client
 JOIN projet ON client.id = projet.client_id
 JOIN devis on projet.id = devis.projet_id
 JOIN facture ON devis.id = facture.devis_id
-WHERE DATEDIFF(facture.date_paiement, facture.date_crea) <= 30;
-
-
+where facture.date_paiement IS NULL 
+OR DAY(facture.date_paiement) > 30;
 
 -- 3e Partie creation du diagram
 
