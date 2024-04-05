@@ -108,6 +108,8 @@ SELECT
 
 --Calcul du nombre d’articles actuellement en cours de location.
 
+SELECT COUNT
+
 --Calcul du nombre d’articles loués, par client.
 
 --Liste des clients qui ont effectué (ou sont en train d’effectuer) plus de 200€ de location.
@@ -119,3 +121,36 @@ SELECT
 --Calcul de la moyenne des recettes de location de surf (combien peut-on espérer gagner pour une location d'un surf ?).
 
 --Calcul de la durée moyenne d'une location d'une paire de skis (en journées entières).
+
+
+-- A liste des gens 
+
+
+SELECT clients.* FROM clients
+WHERE clients.nom like 'D%'
+
+-- B liste des clients nom et prenom
+
+SELECT clients.nom, clients.prenom FROM clients
+
+-- C liste des clients machin loire atlantique
+
+SELECT fiches.noFic, fiches.etat, clients.nom, clients.prenom FROM clients
+JOIN fiches ON clients.noCli = fiches.noCli
+WHERE clients.cpo like '44%'
+
+--D détail fiches n 1002
+
+SELECT * FROM clients
+JOIN fiches ON clients.noCli = fiches.noCli
+JOIN lignesfic ON fiches.noFic = lignesfic.noFic
+JOIN articles ON lignesfic.refart = articles.refart
+JOIN grilletarifs ON articles.codeGam = grilletarifs.codeGam
+JOIN tarifs ON grilletarifs.codeTarif = tarifs.codeTarif
+WHERE fiches.noFic = '1002'
+
+-- E prix journalier moyen par prix location truc
+
+SELECT gammes.libelle, tarifs.prixjour FROM gammes
+JOIN grilletarifs ON gammes.codeGam = grilletarifs.codeGam
+JOIN tarifs ON grilletarifs.codeTarif = tarifs.codeTarif
