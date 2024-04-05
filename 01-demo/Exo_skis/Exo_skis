@@ -151,6 +151,7 @@ WHERE fiches.noFic = '1002'
 
 -- E prix journalier moyen par prix location truc
 
-SELECT gammes.libelle, tarifs.prixjour FROM gammes
+SELECT gammes.libelle, avg(tarifs.prixjour) FROM gammes
 JOIN grilletarifs ON gammes.codeGam = grilletarifs.codeGam
 JOIN tarifs ON grilletarifs.codeTarif = tarifs.codeTarif
+GROUP BY gammes.libelle
