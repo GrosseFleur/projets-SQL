@@ -141,13 +141,14 @@ WHERE clients.cpo like '44%'
 
 --D détail fiches n 1002
 
-SELECT * FROM clients
+SELECT fiches.noFic, clients.nom, clients.prenom, lignesfic.refart, articles.designation, lignesfic.depart, lignesfic.retour, tarifs.prixjour, coalesce(tarifs.prixjour * DATEDIFF(lignesfic.retour, lignesfic.depart), (tarifs.prixjour * DATEDIFF(CURRENT_DATE(), lignesfic.depart))) AS montant FROM clients
 JOIN fiches ON clients.noCli = fiches.noCli
 JOIN lignesfic ON fiches.noFic = lignesfic.noFic
 JOIN articles ON lignesfic.refart = articles.refart
-JOIN grilletarifs ON articles.codeGam = grilletarifs.codeGam
+JOIN grilletarifs ON articles.codeGam = grilletarifs.codeGam AND articles.codeCate = grilletarifs.codeCate
 JOIN tarifs ON grilletarifs.codeTarif = tarifs.codeTarif
-WHERE fiches.noFic = '1002'
+WHERE fiches.noFic = '1002';
+
 
 -- E prix journalier moyen par prix location truc
 
@@ -155,3 +156,5 @@ SELECT gammes.libelle, avg(tarifs.prixjour) FROM gammes
 JOIN grilletarifs ON gammes.codeGam = grilletarifs.codeGam
 JOIN tarifs ON grilletarifs.codeTarif = tarifs.codeTarif
 GROUP BY gammes.libelle
+
+-- F
